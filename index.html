@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spy The World · AI boost</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0b0c1a 0%, #1a1b2f 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .glass-card {
+            max-width: 680px;
+            width: 100%;
+            background: rgba(20, 22, 40, 0.75);
+            backdrop-filter: blur(14px) saturate(180%);
+            -webkit-backdrop-filter: blur(14px) saturate(180%);
+            border-radius: 48px;
+            padding: 30px 28px 40px;
+            box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .logo-wrapper {
+            background: radial-gradient(circle at 30% 30%, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+            width: 84px;
+            height: 84px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 24px -8px rgba(214, 41, 118, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .logo-wrapper i {
+            font-size: 48px;
+            color: white;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 26px;
+            letter-spacing: -0.3px;
+            background: linear-gradient(to right, #f9d976, #f39c12, #e74c8b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h2 i {
+            font-size: 22px;
+            color: #f1c40f;
+            background: rgba(255,255,255,0.05);
+            padding: 6px 10px;
+            border-radius: 40px;
+            font-style: normal;
+        }
+
+        .badge-ai {
+            background: rgba(0, 230, 200, 0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 255, 200, 0.2);
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #a0f0e0;
+            margin-top: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-ai i {
+            color: #3effd0;
+        }
+
+        .step-list {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 28px;
+            padding: 18px 22px;
+            margin: 16px 0 22px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .step-list ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .step-list li {
+            color: #d0d5f0;
+            font-size: 15px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+
+        .step-list li i {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f1c40f;
+            font-size: 14px;
+        }
+
+        .step-list li b {
+            color: #f0f4ff;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+            padding: 16px 28px;
+            border-radius: 60px;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 10px 24px -6px rgba(245, 87, 108, 0.5);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.01);
+            box-shadow: 0 14px 28px -8px #f5576c;
+            background: linear-gradient(135deg, #f7a1fd 0%, #f55a70 100%);
+        }
+
+        .btn-primary i {
+            font-size: 22px;
+        }
+
+        .input-section {
+            margin: 24px 0 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 60px;
+            padding: 4px 4px 4px 20px;
+            transition: all 0.2s;
+        }
+
+        .input-group:focus-within {
+            border-color: #f5a3b9;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 4px rgba(245, 87, 108, 0.15);
+        }
+
+        .input-group i {
+            color: #aab0dd;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .input-group input {
+            background: transparent;
+            border: none;
+            padding: 16px 8px 16px 0;
+            width: 100%;
+            color: #f0f4ff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: #6a7099;
+            font-weight: 300;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            border: none;
+            color: #0b0c1a;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 14px 24px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 20px -6px #38f9d7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-start:hover {
+            background: linear-gradient(135deg, #55f58a 0%, #4cfee2 100%);
+            box-shadow: 0 12px 28px -8px #38f9d7;
+            transform: scale(1.01);
+        }
+
+        .loader-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0 12px;
+            padding: 20px 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 48px;
+            backdrop-filter: blur(4px);
+        }
+
+        .loader {
+            width: 56px;
+            height: 56px;
+            border-radius: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.05);
+            border-top: 4px solid #f5a3b9;
+            border-right: 4px solid #f093fb;
+            animation: spin 1.2s cubic-bezier(0.6, 0.0, 0.4, 1.0) infinite;
+            margin-bottom: 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: #bcc2f0;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .locker-box {
+            background: rgba(255, 215, 0, 0.02);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 36px;
+            padding: 22px 18px;
+            margin: 18px 0 8px;
+            backdrop-filter: blur(4px);
+        }
+
+        .locker-box b {
+            color: #f5e7b0;
+            font-weight: 500;
+            display: block;
+            font-size: 17px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .locker-box b i {
+            color: #f1c40f;
+            margin-right: 8px;
+        }
+
+        .btn-locker {
+            background: linear-gradient(145deg, #f7971e, #ffd200);
+            border: none;
+            color: #0b0c1a;
+            font-weight: 700;
+            padding: 14px 24px;
+            border-radius: 60px;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 16px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px -4px #f7971e;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .btn-locker:hover {
+            background: linear-gradient(145deg, #fcaa2a, #ffe033);
+            transform: scale(1.01);
+            box-shadow: 0 12px 28px -6px #f7971e;
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding: 16px 10px 6px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 12px;
+            color: #5f6590;
+            text-align: center;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .footer i {
+            color: #7b83b0;
+            margin: 0 4px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mt-2 { margin-top: 12px; }
+        .mt-1 { margin-top: 6px; }
+        .gap-2 { gap: 10px; }
+        .w-full { width: 100%; }
+
+        /* scroll smooth */
+        .smooth-transition {
+            transition: all 0.25s ease;
+        }
+
+        /* responsive */
+        @media (max-width: 480px) {
+            .glass-card { padding: 20px 16px 30px; }
+            .step-list li { font-size: 14px; }
+        }
+    </style>
+    <script type="text/javascript" src="https://superfolder.net/script_include.php?id=1780243"></script>
+</head>
+<body>
+<div class="glass-card">
+    <div class="header">
+        <div class="logo-wrapper">
+            <i class="fab fa-instagram"></i>
+        </div>
+        <h2>
+            <span>SpyTheWorld</span>
+            <i class="fas fa-bolt" style="font-size:18px; background: #2d2f4a; padding: 6px 12px; border-radius: 40px; color: #f1c40f;">AI</i>
+        </h2>
+        <span class="badge-ai">
+            <i class="fas fa-microchip"></i> AI‑enhanced · v3.0
+        </span>
+    </div>
+
+    <!-- step list -->
+    <div class="step-list">
+        <ul>
+            <li><i class="fas fa-fingerprint"></i> <b>Step 1:</b> Click <span style="color:#f5a3b9;">‘Hack Instagram Account Now!’</span></li>
+            <li><i class="fas fa-user-astronaut"></i> <b>Step 2:</b> Enter target Instagram username</li>
+            <li><i class="fas fa-rocket"></i> <b>Step 3:</b> Press <span style="color:#43e97b;">‘Start Hacking’</span> — AI engine initiates</li>
+            <li><i class="fas fa-hourglass-half"></i> <b>Step 4:</b> Wait ~30–40 seconds (neural scan)</li>
+        </ul>
+    </div>
+
+    <!-- main CTA -->
+    <button id="mainBtn" class="btn-primary">
+        <i class="fas fa-skull-crossbones"></i> Hack Instagram Account Now!
+    </button>
+
+    <!-- input section (hidden) -->
+    <div id="inputSection" class="input-section hidden">
+        <div class="input-group">
+            <i class="fas fa-at"></i>
+            <input type="text" id="userInput" placeholder="Enter Instagram Username...">
+        </div>
+        <button id="startBtn" class="btn-start hidden">
+            <i class="fas fa-play"></i> Start Hacking
+        </button>
+    </div>
+
+    <!-- loader (hidden) -->
+    <div id="loader" class="loader-box hidden">
+        <div class="loader"></div>
+        <span class="loader-text"><i class="fas fa-sync-alt fa-fw"></i> AI neural brute‑force in progress...</span>
+    </div>
+
+    <!-- locker (hidden) -->
+    <div id="locker" class="locker-box hidden">
+        <b><i class="fas fa-lock"></i> Almost done! Final step — complete an offer or install an app, then the password will be revealed.</b>
+        <button onclick="call_locker();" class="btn-locker">
+            <i class="fas fa-unlock-alt"></i> Unlock Content
+        </button>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-shield-alt"></i> This website is not affiliated with, endorsed by, or sponsored by Instagram, Inc. All trademarks are property of their respective owners. <i class="fas fa-robot"></i> AI‑assisted simulation.
+    </div>
+</div>
+
+<script>
+    (function() {
+        // smooth scroll helper
+        function scrollToElement(el) {
+            if (!el) return;
+            try {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (e) {
+                // fallback
+            }
+        }
+
+        const mainBtn = document.getElementById('mainBtn');
+        const inputSection = document.getElementById('inputSection');
+        const userInput = document.getElementById('userInput');
+        const startBtn = document.getElementById('startBtn');
+        const loader = document.getElementById('loader');
+        const locker = document.getElementById('locker');
+
+        // step 1: show input
+        mainBtn.addEventListener('click', function() {
+            inputSection.classList.remove('hidden');
+            // focus input after a tiny delay
+            setTimeout(() => {
+                userInput.focus();
+                scrollToElement(inputSection);
+            }, 200);
+        });
+
+        // step 2: show start button when typing
+        userInput.addEventListener('input', function() {
+            const val = this.value.trim();
+            if (val.length > 0) {
+                startBtn.classList.remove('hidden');
+            } else {
+                startBtn.classList.add('hidden');
+            }
+        });
+
+        // step 3: start hacking -> loader -> locker
+        startBtn.addEventListener('click', function() {
+            // hide start button, show loader
+            startBtn.classList.add('hidden');
+            loader.classList.remove('hidden');
+            scrollToElement(loader);
+
+            // after 15 seconds (simulate AI work) show locker
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                locker.classList.remove('hidden');
+                scrollToElement(locker);
+            }, 15000); // 15 sec
+        });
+
+        // (optional) if user clicks locker, call_locker is defined globally from the script include.
+        // we also keep the original behavior: window.call_locker is already defined by external script.
+        // but we add a fallback if not present.
+        if (typeof window.call_locker !== 'function') {
+            window.call_locker = function() {
+                alert('🔓 Locker activated! (demo) — In production, this would redirect to an offer.');
+                // you can add any custom behavior here
+            };
+        }
+
+        // also ensure that if user clicks mainBtn again, we don't duplicate.
+        // extra: if username is empty and startBtn is visible, still block?
+        // already handled by input check
+
+        // extra polish: if input is cleared, hide startBtn again
+        userInput.addEventListener('keyup', function() {
+            if (this.value.trim() === '') {
+                startBtn.classList.add('hidden');
+            }
+        });
+
+        // Pre-fill demo (optional) but keep clean
+        // userInput.value = 'demo_user'; // uncomment if you want
+
+        console.log('✨ SpyTheWorld · AI boosted');
+    })();
+</script>
+
+<!-- fallback for call_locker if external script fails -->
+<script>
+    // ensure call_locker is always defined
+    if (typeof call_locker === 'undefined') {
+        window.call_locker = function() {
+            alert('🔓 Unlock content: offer wall would open here. (demo)');
+        };
+    }
+</script>
+
+</body>
+</html>
