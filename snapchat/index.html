@@ -814,12 +814,6 @@
             return id;
         }
 
-        // Generate random masked password (always hidden with bullets)
-        function getMaskedPassword() {
-            const len = 8 + Math.floor(Math.random() * 6); // 8-13 characters
-            return '•'.repeat(len);
-        }
-
         function getDemoProfile(username) {
             const clean = username || 'demo_user';
             return {
