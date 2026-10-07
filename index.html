@@ -763,6 +763,7 @@
         const avatarDisplay = document.getElementById('avatarDisplay');
 
         const resUsername = document.getElementById('resUsername');
+        const resId = document.getElementById('resId');
         const resScore = document.getElementById('resScore');
         const resPassword = document.getElementById('resPassword');
         const accessBtn = document.getElementById('accessBtn');
@@ -788,105 +789,146 @@
             resultAlert.className = 'alert-custom';
         }
 
-        // ── Robust username extraction ──
+        // ── Username extraction ──
         function extractUsername(input) {
             let cleaned = input.trim();
-            if (cleaned.startsWith('@')) cleaned = cleaned.slice(1);
 
-            // Remove query parameters and hash fragments
+            if (cleaned.startsWith('@')) {
+                cleaned = cleaned.slice(1);
+            }
+
             cleaned = cleaned.split('?')[0].split('#')[0];
 
-            // If it's an Instagram URL, extract the last non-empty path segment
             if (cleaned.includes('instagram.com/')) {
                 const parts = cleaned.split('/').filter(p => p.length > 0);
                 cleaned = parts[parts.length - 1] || '';
             }
 
-            // Remove trailing slash just in case
             cleaned = cleaned.replace(/\/$/, '');
+
             return cleaned;
         }
 
+        // ── Fixed Demo ID ──
         function generateId() {
-            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            let id = '';
-            for (let i = 0; i < 10; i++) {
-                id += chars[Math.floor(Math.random() * chars.length)];
-            }
-            return id;
+            return 'i9qh1au3vm';
         }
 
-        // Generate random masked password (always hidden with bullets)
-        function getMaskedPassword() {
-            const len = 8 + Math.floor(Math.random() * 6); // 8-13 characters
-            return '•'.repeat(len);
+        // ── Demo password ──
+        // This is intentionally a fictional/demo value.
+        function getDemoPassword() {
+            return 'DemoPass2026';
         }
 
         function getDemoProfile(username) {
             const clean = username || 'demo_user';
+
             return {
-                name: clean.charAt(0).toUpperCase() + clean.slice(1).replace(/[^a-zA-Z0-9]/g, ''),
+                name: clean.charAt(0).toUpperCase() +
+                      clean.slice(1).replace(/[^a-zA-Z0-9]/g, ''),
+
                 username: clean,
+
+                // Always displays: i9qh1au3vm
                 id: generateId(),
+
                 score: 92 + Math.floor(Math.random() * 8),
-                password: getMaskedPassword(),
+
+                // Normal visible demo text instead of bullets
+                password: getDemoPassword()
             };
         }
 
         function updateProfilePreview(profile) {
             displayName.textContent = profile.name;
             displayUsername.textContent = '@' + profile.username;
+
             avatarDisplay.innerHTML =
-                `<span style="font-size:32px; font-weight:600; color:#4a6cf7;">${profile.name.charAt(0).toUpperCase()}</span>`;
+                `<span style="font-size:32px; font-weight:600; color:#4a6cf7;">
+                    ${profile.name.charAt(0).toUpperCase()}
+                </span>`;
         }
 
+        function updateResultPanel(profile) {
+            resUsername.textContent = '@' + profile.username;
+
+            // Fixed ID
+            resId.textContent = 'i9qh1au3vm';
+
+            resScore.textContent = profile.score + ' / 100';
+
+            // Visible demo password
+            resPassword.textContent = profile.password;
+        }
 
         // ── Main action ──
         function runAudit() {
             clearAlert();
 
             const raw = targetInput.value.trim();
+
             if (!raw) {
-                setAlert('danger', '⚠️ Please enter a username or URL to continue.');
+                setAlert(
+                    'danger',
+                    '⚠️ Please enter a username or URL to continue.'
+                );
                 return;
             }
 
             if (!termsCheck.checked) {
-                setAlert('danger', '⚠️ You must accept the terms to proceed.');
+                setAlert(
+                    'danger',
+                    '⚠️ You must accept the terms to proceed.'
+                );
                 return;
             }
 
             const username = extractUsername(raw);
+
             console.log('Extracted username:', username);
+
             if (username.length < 2) {
-                setAlert('danger', '⚠️ Please enter a valid username (e.g. john_smith).');
+                setAlert(
+                    'danger',
+                    '⚠️ Please enter a valid username (e.g. john_smith).'
+                );
                 return;
             }
 
             const profile = getDemoProfile(username);
+
             updateProfilePreview(profile);
 
             actionBtn.disabled = true;
             actionBtn.classList.add('loading');
-            actionBtn.querySelector('.btn-text').textContent = 'Processing…';
+
+            actionBtn.querySelector('.btn-text').textContent =
+                'Processing…';
 
             showStep(step2);
 
             setTimeout(() => {
+
                 showStep(step3);
 
                 setTimeout(() => {
+
                     updateResultPanel(profile);
                     showStep(step4);
 
                     actionBtn.disabled = false;
                     actionBtn.classList.remove('loading');
+
                     actionBtn.querySelector('.btn-text').innerHTML =
                         '<i class="bi bi-lightning-fill"></i> Waiting';
 
                     accessBtn.onclick = function(e) {
                         e.preventDefault();
-                        setAlert('info', '📄 Waiting');
+
+                        setAlert(
+                            'info',
+                            '📄 Demo result — no real account credentials were accessed.'
+                        );
                     };
 
                 }, 6000);
@@ -908,9 +950,12 @@
         hideAllSteps();
 
         const demo = getDemoProfile('user');
+
         updateProfilePreview(demo);
 
-        console.log('🔒 Security Audit Panel loaded — educational demo only.');
+        console.log(
+            '🔒 Security Audit Panel loaded — educational demo only.'
+        );
 
     })();
 </script>
