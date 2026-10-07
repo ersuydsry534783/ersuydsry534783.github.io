@@ -840,12 +840,6 @@
                 `<span style="font-size:32px; font-weight:600; color:#4a6cf7;">${profile.name.charAt(0).toUpperCase()}</span>`;
         }
 
-        function updateResultPanel(profile) {
-            resUsername.textContent = '@' + profile.username;
-            resId.textContent = profile.id;
-            resScore.textContent = profile.score + ' / 100';
-            resPassword.textContent = profile.password;
-        }
 
         // ── Main action ──
         function runAudit() {
