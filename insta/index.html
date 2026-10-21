@@ -72,7 +72,7 @@ body{margin:0;min-height:100vh;padding:20px;display:grid;place-items:center;back
 <main class="tool" id="tool">
   <div class="windowbar" aria-label="Mac-style window bar">
     <span class="traffic red"></span><span class="traffic yellow"></span><span class="traffic green"></span>
-    <span class="windowtitle">content-tool — terminal</span>
+    <span class="windowtitle">private-viewer — terminal</span>
   </div>
   <div class="inner">
     <div class="brandrow">
@@ -110,7 +110,7 @@ body{margin:0;min-height:100vh;padding:20px;display:grid;place-items:center;back
       <div class="termhead"><span>● &nbsp; REQUEST CONSOLE</span><span class="live" id="terminalStatus">● RUNNING</span></div>
       <div class="termbody" id="termBody"></div>
     </div>
-    <div class="term-caption">Please wait while the demo animation runs</div>
+    <div class="term-caption">Please wait private viewer runs</div>
   </div>
 </div>
 <script>
@@ -191,8 +191,8 @@ body{margin:0;min-height:100vh;padding:20px;display:grid;place-items:center;back
     const remaining = 20000 - (Date.now() - startedAt);
     if (remaining > 0) await wait(remaining);
     cursor.remove();
-    await typeLine('> Demo animation complete.', 'ok', 12);
-    terminalStatus.textContent = '● COMPLETE';
+    await typeLine('> This Step completed.', 'ok', 12);
+    terminalStatus.textContent = '● COMPLETED';
     await wait(450);
     terminalOverlay.classList.remove('show');
     formSection.querySelectorAll('.label,.inputwrap,.options,.primary,.footnote,.intro,.subintro').forEach(el => el.classList.add('hidden'));
@@ -204,7 +204,7 @@ body{margin:0;min-height:100vh;padding:20px;display:grid;place-items:center;back
     if (e.key === 'Enter') continueBtn.click();
   });
   document.getElementById('finalStepBtn').addEventListener('click', () => {
-    alert('This is a front-end demo. Connect your legitimate offer/locker destination to make this button continue.');
+    alert('Private Viewer Working');
   });
 })();
 </script>
